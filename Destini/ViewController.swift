@@ -32,6 +32,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var bottomButton: UIButton!      // Has TAG = 2
     @IBOutlet weak var storyTextView: UILabel!
     
+	@IBOutlet weak var restart: UIButton!
     // TODO Step 5: Initialise instance variables here
 //	init() {
 //
@@ -42,10 +43,12 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
 	storyArray=[story1,story2,story3,story4,story5,story6]
-		answerTopArray=[answer1a,answer2a]
-		answerButtomArray=[answer2a,answer2b]
+		answerTopArray=[answer1a,answer2a,answer3a]
+		answerButtomArray=[answer2a,answer2b,answer3b]
         // TODO Step 3: Set the text for the storyTextView, topButton, bottomButton, and to T1_Story, T1_Ans1, and T1_Ans2
         updateUI(qNumbe: 1)
+		self.restart.isHidden=true
+
     }
 
     
@@ -89,16 +92,26 @@ class ViewController: UIViewController {
     
     }
     
+	@IBAction func Restart(_ sender: UIButton) {
+		
+		updateUI(qNumbe: 1)
+		self.topButton.isHidden=false
+		self.bottomButton.isHidden=false
+		self.restart.isHidden=true
+		
+	}
 	func updateUI(qNumbe:Int) {
 		
 		storyTextView.text=storyArray[qNumbe-1]
-		if qNumbe<3
+		if qNumbe<4
 		{
 			topButton.setTitle(answerTopArray[qNumbe-1], for: [])
 			bottomButton.setTitle(answerButtomArray[qNumbe-1], for: [])
 		}else{
 			self.topButton.isHidden=true
 			self.bottomButton.isHidden=true
+			self.restart.isHidden=false
+			
 		}
 		
 		
