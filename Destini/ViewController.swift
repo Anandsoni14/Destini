@@ -24,30 +24,64 @@ class ViewController: UIViewController {
     let story4 = "What? Such a cop out! Did you know traffic accidents are the second leading cause of accidental death for most adult age groups?"
     let story5 = "As you smash through the guardrail and careen towards the jagged rocks below you reflect on the dubious wisdom of stabbing someone while they are driving a car you are in."
     let story6 = "You bond with the murderer while crooning verses of \"Can you feel the love tonight\". He drops you off at the next town. Before you go he asks you if you know any good places to dump bodies. You reply: \"Try the pier.\""
-    
-    
+	var storyArray = [String]()
+	var answerTopArray = [String]()
+	var answerButtomArray = [String]()
     // UI Elements linked to the storyboard
     @IBOutlet weak var topButton: UIButton!         // Has TAG = 1
     @IBOutlet weak var bottomButton: UIButton!      // Has TAG = 2
     @IBOutlet weak var storyTextView: UILabel!
     
     // TODO Step 5: Initialise instance variables here
-    
-    
-    
+//	init() {
+//
+//	}
+	
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+	storyArray=[story1,story2,story3,story4,story5,story6]
+		answerTopArray=[answer1a,answer2a]
+		answerButtomArray=[answer2a,answer2b]
         // TODO Step 3: Set the text for the storyTextView, topButton, bottomButton, and to T1_Story, T1_Ans1, and T1_Ans2
-        
+        updateUI(qNumbe: 1)
     }
 
     
     // User presses one of the buttons
     @IBAction func buttonPressed(_ sender: UIButton) {
-    
+		
+		//var storyText = storyTextView.text
+		let storyText : String = storyTextView.text!
+		
+		switch storyText {
+		case story1:
+			if sender.tag==1{
+				updateUI(qNumbe: 2)
+			}else{
+				updateUI(qNumbe: 3)
+			}
+			break
+		case story2:
+			if sender.tag==1{
+				updateUI(qNumbe: 5)
+			}else{
+				updateUI(qNumbe: 6)
+			}
+			break
+		case story3:
+			if sender.tag==1{
+				updateUI(qNumbe: 2)
+			}else{
+				updateUI(qNumbe: 4)
+			}
+		
+			break
+		default:
+			break
+			
+		}
         // TODO Step 4: Write an IF-Statement to update the views
                 
         // TODO Step 6: Modify the IF-Statement to complete the story
@@ -55,7 +89,20 @@ class ViewController: UIViewController {
     
     }
     
-    
+	func updateUI(qNumbe:Int) {
+		
+		storyTextView.text=storyArray[qNumbe-1]
+		if qNumbe<3
+		{
+			topButton.setTitle(answerTopArray[qNumbe-1], for: [])
+			bottomButton.setTitle(answerButtomArray[qNumbe-1], for: [])
+		}else{
+			self.topButton.isHidden=true
+			self.bottomButton.isHidden=true
+		}
+		
+		
+	}
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
